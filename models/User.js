@@ -24,7 +24,7 @@ const userSchema = mongoose.Schema({
         min: 6,
         max: 1024
     },
-    password_confirmation: {
+    confirm_password: {
         type: String,
         required: true,
         min: 6,
