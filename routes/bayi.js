@@ -37,7 +37,7 @@ router.get('/', verifyToken, async (req, res) => {
 //read bayi by id
 router.get('/:id_bayi', verifyToken, async (req, res) => {
     try {
-        const bayi = await Bayi.find({ _id: req.params.id_bayi})
+        const bayi = await Bayi.findOne({ _id: req.params.id_bayi})
         res.json(bayi)
     } catch (err) {
         res.json({message: err})
