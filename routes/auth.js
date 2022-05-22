@@ -6,6 +6,8 @@ const User = require('../models/User')
 
 const { registerValidation } = require('../configs/validation')
 const { loginValidation } = require('../configs/validation')
+const { changePasswordValidation } = require('../configs/validation')
+
 
 //register
 router.post('/register', async (req, res) => {
@@ -39,7 +41,7 @@ router.post('/register', async (req, res) => {
         email: req.body.email,
         username: req.body.username,
         password: hashPassword,
-        password_confirmation: hashPassword
+        confirm_password: hashPassword
     })
 
     try {
@@ -112,6 +114,34 @@ router.put('/:id_user', async (req, res) => {
         res.json(userUpdate)
     } catch (err) {
         res.json({message: err})
+    }
+})
+
+//Update Password
+//berhasil update pw tapi belum bisa input pw lama
+router.put('/changePW/:id_user', async (req, res, next) => {
+    //validasi pw Joi
+    const { error } = changePasswordValidation(req.body)
+    if(error) return res.status(400).json({
+        status: res.statusCode,
+        message: error.details[0].message
+    })
+    try {
+        const { id_user } = req.params
+        const salt = await bcrypt.genSalt(10)
+        const hashPassword = await bcrypt.hash(req.body.password, salt)
+        const pwUpdate = await User.findByIdAndUpdate({ _id: id_user }, {
+            //old_password: hashPassword,
+            password: hashPassword,
+            confirm_password: hashPassword
+            }, { new: true })
+        return res.status(200).json({
+            status: true,
+            message: "Password berhasil di ubah",
+            data: pwUpdate
+        })
+    } catch (error) {
+        return res.status(400).json({status: false, error: "Error Occured"})
     }
 })
 
