@@ -1,8 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const Bayi = require('../models/Bayi')
-
-const verifyToken = require('../routes/verifyToken')
+const express       = require('express')
+const router        = express.Router()
+const Bayi          = require('../models/Bayi')
+const verifyToken   = require('../routes/verifyToken')
 
 //create
 router.post('/', async (req, res) => {
