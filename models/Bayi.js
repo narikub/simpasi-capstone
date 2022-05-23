@@ -1,5 +1,4 @@
-const string = require('@hapi/joi/lib/types/string')
-const mongoose = require('mongoose')
+const mongoose  = require('mongoose')
 
 const BayiSchema = mongoose.Schema({
     nama: {
@@ -27,7 +26,7 @@ const BayiSchema = mongoose.Schema({
         required: true
     },
     alergi: {
-        type: string
+        type: String
     },
     tglTerdaftar: {
         type: Date,
