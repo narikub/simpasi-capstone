@@ -49,6 +49,6 @@ const changePasswordValidation = (data) => {
     return schema.validate(data)
 }
 
-module.exports.registerValidation = registerValidation
-module.exports.loginValidation = loginValidation
+module.exports.registerValidation       = registerValidation
+module.exports.loginValidation          = loginValidation
 module.exports.changePasswordValidation = changePasswordValidation
