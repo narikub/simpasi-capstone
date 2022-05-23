@@ -1,13 +1,12 @@
-const express = require('express')
-const router = express.Router()
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const User = require('../models/User')
+const express   = require('express')
+const router    = express.Router()
+const bcrypt    = require('bcryptjs')
+const jwt       = require('jsonwebtoken')
+const User      = require('../models/User')
 
-const { registerValidation } = require('../configs/validation')
-const { loginValidation } = require('../configs/validation')
-const { changePasswordValidation } = require('../configs/validation')
-
+const { registerValidation }        = require('../configs/validation')
+const { loginValidation }           = require('../configs/validation')
+const { changePasswordValidation }  = require('../configs/validation')
 
 //register
 router.post('/register', async (req, res) => {
@@ -63,7 +62,6 @@ router.post('/login', async (req, res) => {
         message: error.details[0].message
     })
 
-    
     const { usernameEmail, password } = req.body
     const user = await User.findOne({ $or: [{ username: usernameEmail }, { email: usernameEmail }] })
     if (!user) return res.status(400).json({
@@ -93,23 +91,23 @@ router.post('/login', async (req, res) => {
 router.put('/:id_user', async (req, res) => {
     //if email exist
     const emailExist = await User.findOne({email: req.body.email})
-    if(emailExist) return res.status(400).json({
+    if(emailExist) return res.status(404).json({
         status: res.statusCode,
         message: 'Email Sudah digunakan!'
     })
 
     //if username exist
-    const usernameExist = await User.findOne({username: req.body.username})
-    if(usernameExist) return res.status(400).json({
+    const usernameExist = await User.findOne({email: req.body.username})
+    if(usernameExist) return res.status(404).json({
         status: res.statusCode,
-        message: 'Username Sudah digunakan!'
+        message: 'username Sudah digunakan!'
     })
 
     try {
         const userUpdate = await User.updateOne({ _id: req.params.id_user}, {
-            nama: req.body.nama,
+            email: req.body.email,
             username: req.body.username,
-            email: req.body.email
+            nama: req.body.nama
         })
         res.json(userUpdate)
     } catch (err) {
@@ -119,7 +117,7 @@ router.put('/:id_user', async (req, res) => {
 
 //Update Password
 //berhasil update pw tapi belum bisa input pw lama
-router.put('/changePW/:id_user', async (req, res, next) => {
+router.put('/change-pw/:id_user', async (req, res, next) => {
     //validasi pw Joi
     const { error } = changePasswordValidation(req.body)
     if(error) return res.status(400).json({
