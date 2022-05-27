@@ -3,6 +3,7 @@ const router    = express.Router()
 const bcrypt    = require('bcryptjs')
 const jwt       = require('jsonwebtoken')
 const User      = require('../models/User')
+const Bayi      = require('../models/Bayi')
 
 const { registerValidation }        = require('../configs/validation')
 const { loginValidation }           = require('../configs/validation')
