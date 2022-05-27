@@ -1,6 +1,7 @@
 const mongoose  = require('mongoose')
+const Schema    = mongoose.Schema
 
-const BayiSchema = mongoose.Schema({
+const BayiSchema = new Schema({
     nama: {
         type: String,
         required: true
@@ -31,6 +32,10 @@ const BayiSchema = mongoose.Schema({
     tglTerdaftar: {
         type: Date,
         default: Date.now
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 })
 
