@@ -3,11 +3,8 @@ const router    = express.Router()
 const bcrypt    = require('bcryptjs')
 const jwt       = require('jsonwebtoken')
 const User      = require('../models/User')
-const Bayi      = require('../models/Bayi')
 
-const { registerValidation }        = require('../configs/validation')
-const { loginValidation }           = require('../configs/validation')
-const { changePasswordValidation }  = require('../configs/validation')
+const { registerValidation, loginValidation, changePasswordValidation } = require('../configs/validation')
 
 //register
 router.post('/register', async (req, res) => {
