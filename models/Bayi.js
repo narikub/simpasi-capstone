@@ -4,30 +4,26 @@ const Schema    = mongoose.Schema
 const BayiSchema = new Schema({
     nama: {
         type: String,
-        required: true
     },
     tglLahir: {
         type: Date,
-        required: true
-    },
-    umur: {
-        type: Number,
-        required: true
     },
     jk_bayi: {
-        type: String,
-        enum: "Perempuan" || "Laki-laki"
-    },
-    tb_bayi: {
-        type: Number,
-        required: true
+        type: String
+        //enum : ['P','L'],
     },
     bb_bayi: {
-        type: Number,
-        required: true
+        type: String,
     },
     alergi: {
-        type: String
+        Roti_Tawar: String,
+        Cumi_Cumi: String,
+        Tepung_Beras: String,
+        Pisang: String,
+        Telur_Bebek: String,
+        Kacang_Tanah: String,
+        Kerang: String,
+        Alpukat: String,
     },
     tglTerdaftar: {
         type: Date,
