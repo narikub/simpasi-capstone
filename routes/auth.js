@@ -92,14 +92,14 @@ router.post('/login', async (req, res) => {
 router.put('/:id_user', async (req, res) => {
     //if email exist
     const emailExist = await User.findOne({email: req.body.email})
-    if(emailExist) return res.status(404).json({
+    if(emailExist) return res.status(400).json({
         status: res.statusCode,
         message: 'Email Sudah digunakan!'
     })
 
     //if username exist
     const usernameExist = await User.findOne({email: req.body.username})
-    if(usernameExist) return res.status(404).json({
+    if(usernameExist) return res.status(400).json({
         status: res.statusCode,
         message: 'username Sudah digunakan!'
     })
