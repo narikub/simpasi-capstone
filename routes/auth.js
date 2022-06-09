@@ -79,6 +79,7 @@ router.post('/login', async (req, res) => {
     res.header('auth-token', token).json({
         message: 'berhasil login',
         id: user._id,
+        nama: user.nama,
         username: user.username,
         email: user.email,
         token: token
