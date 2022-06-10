@@ -6,7 +6,9 @@ const mongoose      = require('mongoose')
 const cors          = require('cors')
 
 //Middleware
-app.use(bodyParser())
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 app.use(cors())
 
 //import routes
