@@ -1,3 +1,4 @@
+## API Endpoint
 **User**
 |Endpoint|Method|Body|
 |-------|:----:|:---:|
